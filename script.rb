@@ -49,6 +49,16 @@ if array == arra_2
     puts false
 end
 
+# ------- EXAMPLE 02. Break a loop. -----
+
+for  in 0...50
+    puts a
+    if a == 20
+        break
+    end
+    a += 1
+end
+
 =end
 
 # ------------------------------------------------ START -------------------------------------------------
@@ -91,10 +101,53 @@ def showPlayersList(players_stock)
     end
 end
 
+def ticTacToeCompare(player_own_response, tic_tac_toe_wins)
+        
+    for i in 0...tic_tac_toe_wins.length
 
+        if tic_tac_toe_wins[i] == player_own_response
+            return true
+        end
+    end    
+end
 
+def ticTacToeDisplay(player_choice, symbol, tic_tac_toe_matrix)
+        if player_choice == 0
+        tic_tac_toe_matrix [0][0] = symbol
 
+        elsif player_choice == 1
+        tic_tac_toe_matrix [0][1] = symbol
 
+        elsif player_choice == 2
+        tic_tac_toe_matrix [0][2] = symbol
+
+        elsif player_choice == 3
+        tic_tac_toe_matrix [1][0] = symbol
+        
+        elsif player_choice == 4
+        tic_tac_toe_matrix [1][1] = symbol
+
+        elsif player_choice == 5
+        tic_tac_toe_matrix [1][2] = symbol
+
+        elsif player_choice == 6
+        tic_tac_toe_matrix [2][0] = symbol
+
+        elsif player_choice == 7
+        tic_tac_toe_matrix [2][1] = symbol
+
+        elsif player_choice == 8
+        tic_tac_toe_matrix [2][2] = symbol    
+
+        end    
+
+        puts "#{tic_tac_toe_matrix [0][0]} | #{tic_tac_toe_matrix [0][1]} | #{tic_tac_toe_matrix [0][2]}          0 | 1 | 2"
+        puts "---------------"
+        puts "#{tic_tac_toe_matrix [1][0]} | #{tic_tac_toe_matrix [1][1]} | #{tic_tac_toe_matrix [1][2]}          3 | 4 | 5"
+        puts "---------------"
+        puts "#{tic_tac_toe_matrix [2][0]} | #{tic_tac_toe_matrix [2][1]} | #{tic_tac_toe_matrix [2][2]}          6 | 7 | 8"
+
+end
 
 # ---------------------------------- VARIABLES. --------------------------------
 
@@ -121,6 +174,8 @@ player_info = Player.new(player_name, player_victories)
 players_stock = Array.new
 player_result_1 = Array.new
 player_result_2 = Array.new
+tic_tac_toe_matrix = Array.new
+players_in_role = Array.new
 
 players_stock.push(player_info)
 
@@ -145,8 +200,13 @@ tic_tac_toe_wins = [        # All the possible winner's combinations.
 
 ]
 
-# ---------------------------------- STEPS. --------------------------------
+tic_tac_toe_matrix = [
+    [" ", " ", " "],
+    [" ", " ", " "],
+    [" ", " ", " "]
+]
 
+# ---------------------------------- STEPS. --------------------------------
 
 # --------- STEP 00. Welcome message------------
 puts "\n"
@@ -190,12 +250,17 @@ while menu_option_1 != 4
                 puts "\n"
                 puts "Player 1 (X) will be: #{players_stock[player1].name}, victories: #{players_stock[player1].victories}"
                 puts "Player 2 (O) will be: #{players_stock[player2].name}, victories: #{players_stock[player2].victories}"
+                players_in_role = [
+                    [players_stock[player1], player_result_1, "X"], 
+                    [players_stock[player2], player_result_2, "O"] 
+                ]
                 puts "\n"
                 puts "Are you ready?"
                 puts "\n"
                 puts "(1) Yes."
                 puts "(2) No."
                 puts "\n"
+                print "R: "
                 ready_or_not = (gets.chomp).to_i
 
                 if ready_or_not == 1
@@ -231,37 +296,58 @@ while menu_option_1 != 4
                     puts "(1) Yes."
                     puts "(2) No."
                     puts "\n"
+                    print "R: "
                     players_agree = (gets.chomp).to_i
 
                     if players_agree == 1
                         puts "\n"
                         puts "PERFECT! Let's do this!."
 
+
+
+
+
+
+
+
+
+
+
+
+
                         turn_games = 0
+                        response = false
                         while turn_games < 9
 
-                                response = setPlayerChoice(player_result_1, player_result_2, tic_tac_toe_wins, players_stock, player_choice)
-                                if response true
-                                    turn_games = 9
-                                elsif
-                                    turn_games += 1
+                            players_in_role.each do |player_in_turn, player_own_response, symbol|
+                                if turn_games == 9
+                                    puts "\n"
+                                    puts "No one could win this time. Good luck next time!"
+                                    break
+                                break
                                 end
-
-                                response = setPlayerChoice(player_result_1, player_result_2, tic_tac_toe_wins, players_stock, player_choice)
-                                if response true
+                                print "Please: #{player_in_turn.name}, you turn: "
+                                player_choice = (gets.chomp).to_i
+                                player_own_response.push(player_choice)
+                                puts "You response: #{player_own_response}"
+                                ticTacToeDisplay(player_choice, symbol, tic_tac_toe_matrix)
+                                response = ticTacToeCompare(player_own_response, tic_tac_toe_wins)
+                                if response == true
+                                    print "#{player_in_turn.name}, YOU WON !!!"
+                                    print "It was a really good match. Please, come back later!"
+                                    puts "\n"
+                                    player_in_turn.victories += 1
                                     turn_games = 9
-                                elsif
-                                    turn_games += 1
+                                    break
+                                break
+                                else
+                                    response = false
                                 end
-                            
+                                turn_games += 1
+                                puts "Turn: #{turn_games}"
+                            end
 
-
-
-
-
-
-
-
+                          
 
 
 
@@ -279,9 +365,16 @@ while menu_option_1 != 4
 
 
                         end
-                        response = false
+                        response = 0
+                        player_choice = 0
                         player_result_1 = []
                         player_result_2 = []
+                        players_in_role = []
+                        tic_tac_toe_matrix = [
+                            [" ", " ", " "],
+                            [" ", " ", " "],
+                            [" ", " ", " "]
+                        ]
                         turn_games = 0
                     else
                         puts "\n"
@@ -293,6 +386,7 @@ while menu_option_1 != 4
                         puts "\n"
                         puts "Come on! Well, you can do it later."
                 end
+                players_in_role = []
                 ready_or_not = 0
                 else
                 puts "\n"
@@ -324,6 +418,7 @@ while menu_option_1 != 4
             puts "\n"
             puts "You type a different value, please try again."
             puts "\n"
+            menu_option_1 = 0
     end
 end
 
