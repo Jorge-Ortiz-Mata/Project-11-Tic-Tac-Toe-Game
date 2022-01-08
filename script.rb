@@ -263,6 +263,8 @@ puts "WELCOME TO THE TIC TAC TOC GAME"
 puts "\n"
 puts "Before to start, tell me, are you a new player or you've already registered in our database?"
 
+# --------- STEP 10. Ask to the players. ------------
+
 while menu_option_1 != 4
 
     puts "\n"
@@ -276,14 +278,20 @@ while menu_option_1 != 4
 
     case menu_option_1
 
+# --------- STEP 20. Create a new player. ------------
+
         when menu_option_1 = 1
             puts "\n"
             cratePlayer(players_stock)
             menu_option_1 = 0
 
+# --------- STEP 30. Play the game. ------------
+
         when menu_option_1 = 2
             puts "\n"
             puts "You've chosen play the game!."
+
+# --------- STEP 31. Chose players. ------------
 
             if players_stock.length > 1
                 puts "\n"
@@ -310,6 +318,8 @@ while menu_option_1 != 4
                 puts "\n"
                 print "R: "
                 ready_or_not = (gets.chomp).to_i
+
+# --------- STEP 32. Game's instructions. ------------
 
                 if ready_or_not == 1
                     puts "\n"
@@ -346,6 +356,8 @@ while menu_option_1 != 4
                     puts "\n"
                     print "R: "
                     players_agree = (gets.chomp).to_i
+
+# --------- STEP 33. Playing the game. ------------
 
                     if players_agree == 1
                         puts "\n"
@@ -415,7 +427,9 @@ while menu_option_1 != 4
                                 puts "Turn: #{turn_games}"
                             end
                         end
-                        
+
+# --------- STEP 33. Reseting the game. ------------
+
                         same_response = 0
                         response = 0
                         player_choice = 0
@@ -429,6 +443,7 @@ while menu_option_1 != 4
                             [" ", " ", " "]
                         ]
                         turn_games = 0
+                        
                     else
                         puts "\n"
                         puts "I see, well you can see an example by going to this website: yorch-edu.com"
@@ -452,6 +467,8 @@ while menu_option_1 != 4
                 puts "\n"
             end
 
+# --------- STEP 40. See all players. ------------
+
             menu_option_1 = 0
         when menu_option_1 = 3
             puts "\n"
@@ -461,11 +478,15 @@ while menu_option_1 != 4
             showPlayersList(players_stock)
             menu_option_1 = 0
 
+# --------- STEP 50. Leave the game. ------------
+
         when menu_option_1 = 4
             puts "\n"
             puts "You've decided to leave the game."
             puts "Have an amazing day!!"
             puts "\n"
+
+# --------- STEP 60. Wrong option. ------------
 
         else
             puts "\n"
