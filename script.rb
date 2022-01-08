@@ -141,11 +141,13 @@ def ticTacToeDisplay(player_choice, symbol, tic_tac_toe_matrix)
 
         end    
 
+        puts "\n"
         puts "#{tic_tac_toe_matrix [0][0]} | #{tic_tac_toe_matrix [0][1]} | #{tic_tac_toe_matrix [0][2]}          0 | 1 | 2"
-        puts "---------------"
+        puts "---------"
         puts "#{tic_tac_toe_matrix [1][0]} | #{tic_tac_toe_matrix [1][1]} | #{tic_tac_toe_matrix [1][2]}          3 | 4 | 5"
-        puts "---------------"
+        puts "---------"
         puts "#{tic_tac_toe_matrix [2][0]} | #{tic_tac_toe_matrix [2][1]} | #{tic_tac_toe_matrix [2][2]}          6 | 7 | 8"
+        puts "\n"
 
 end
 
