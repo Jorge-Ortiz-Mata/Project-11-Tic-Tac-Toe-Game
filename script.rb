@@ -91,6 +91,11 @@ def showPlayersList(players_stock)
     end
 end
 
+
+
+
+
+
 # ---------------------------------- VARIABLES. --------------------------------
 
 player_name = "Jorge"
@@ -98,26 +103,24 @@ player_victories = 0
 
 player1 = 0
 player2 = 0
-
-player1_choice = 0
-player2_choice = 0
+player_choice = 0
 
 ready_or_not = 0
 players_agree = 0
 turn_games = 0
 menu_option_1 = 0
 
+response = false
+
 # ------------------------------------ OBJECTS. --------------------------------
 
 player_info = Player.new(player_name, player_victories)
 
-
-
-
-
 # ------------------------------------ ARRAYS. --------------------------------
 
 players_stock = Array.new
+player_result_1 = Array.new
+player_result_2 = Array.new
 
 players_stock.push(player_info)
 
@@ -141,11 +144,6 @@ tic_tac_toe_wins = [        # All the possible winner's combinations.
     [6, 4, 2]
 
 ]
-
-
-
-
-
 
 # ---------------------------------- STEPS. --------------------------------
 
@@ -180,7 +178,6 @@ while menu_option_1 != 4
             puts "You've chosen play the game!."
 
             if players_stock.length > 1
-                ready_or_not = 0
                 puts "\n"
                 puts "This our current player's database: "
                 puts "\n"
@@ -202,11 +199,10 @@ while menu_option_1 != 4
                 ready_or_not = (gets.chomp).to_i
 
                 if ready_or_not == 1
-                    players_agree = 0
                     puts "\n"
                     puts "HERE WE GO! TIC TAC TOE'S GAME WAS BEGIN!"
                     puts "\n"
-                    puts "Remember you have to type the position's number of the tic tac toe."
+                    puts "Remember you have to type the position's number of the tic tac toe. These are the positions: "
                     puts "\n"
                     puts "0|1|2"
                     puts "-----"
@@ -214,7 +210,7 @@ while menu_option_1 != 4
                     puts "-----"
                     puts "6|7|8"
                     puts "\n"
-                    puts "For example, if I am player 1 (X) and I type the position's number 3 on my keyboard, this will be the result: "
+                    puts "For example, if I am player 1 (X) and I type the position's number 3 on the keyboard, this will be the result: "
                     puts "\n"
                     puts " | | "
                     puts "-----"
@@ -222,7 +218,7 @@ while menu_option_1 != 4
                     puts "-----"
                     puts " | | "
                     puts "\n"
-                    puts "And, if I am player 2 (O) and I type the position's number 6 on my keyboard, this will be the result: "
+                    puts "And, if I am player 2 (O) and I type the position's number 6 on the keyboard, this will be the result: "
                     puts "\n"
                     puts " | | "
                     puts "-----"
@@ -238,29 +234,66 @@ while menu_option_1 != 4
                     players_agree = (gets.chomp).to_i
 
                     if players_agree == 1
+                        puts "\n"
+                        puts "PERFECT! Let's do this!."
 
-                        puts "Player 1, you turn. "
+                        turn_games = 0
+                        while turn_games < 9
+
+                                response = setPlayerChoice(player_result_1, player_result_2, tic_tac_toe_wins, players_stock, player_choice)
+                                if response true
+                                    turn_games = 9
+                                elsif
+                                    turn_games += 1
+                                end
+
+                                response = setPlayerChoice(player_result_1, player_result_2, tic_tac_toe_wins, players_stock, player_choice)
+                                if response true
+                                    turn_games = 9
+                                elsif
+                                    turn_games += 1
+                                end
+                            
 
 
 
-                        #turn_games = 0
-                        #while turn_games < 9
-                        #end
 
 
 
 
 
 
-                        else
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        end
+                        response = false
+                        player_result_1 = []
+                        player_result_2 = []
+                        turn_games = 0
+                    else
                         puts "\n"
                         puts "I see, well you can see an example by going to this website: yorch-edu.com"
                         puts "\n"
                     end
+                    players_agree = 0
                     else
                         puts "\n"
                         puts "Come on! Well, you can do it later."
-                end            
+                end
+                ready_or_not = 0
                 else
                 puts "\n"
                 puts "Sorry, but, it seems that there's only one player. You need another player to play with."
@@ -271,6 +304,7 @@ while menu_option_1 != 4
                 showPlayersList(players_stock)
                 puts "\n"
             end
+
             menu_option_1 = 0
         when menu_option_1 = 3
             puts "\n"
@@ -292,9 +326,5 @@ while menu_option_1 != 4
             puts "\n"
     end
 end
-
-
-
-
 
 # ------------------------------------------------- END --------------------------------------------------
