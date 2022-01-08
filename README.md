@@ -17,15 +17,15 @@
         and files are in this repository.
         I hoe you enjoy this project!
         
-    Instructions used:
-        - Variables.
-        - If-Else Statements.
-        - While Loops.
-        - For Loops.
-        - Case expresions.
-        - Methods or functions.
-        - Clases.
-        - Arrays.
+## Instructions used:
+   - Variables.
+   - If-Else Statements.
+   - While Loops.
+   - For Loops.
+   - Case expresions.
+   - Methods or functions.
+   - Clases.
+   - Arrays.
     
 Have a wonderful day! :smiley:
 Greetings :love_you_gesture:
