@@ -61,6 +61,41 @@ end
 
 =end
 
+=begin
+array = [3, 6, 4]
+array2 = Array.new
+
+for i in 0...array.length
+    print "Insert a value: "
+    value = (gets.chomp).to_i
+end
+=end
+
+# ------- EXAMPLE 03. Comparing array's contents. -----
+=begin
+numbers = [
+    [2,8,4],
+    [6,2,9],
+    [9,2,9],
+    [9,2,6],
+    [2,6,1],
+    [0,7,4]
+]
+
+numbers2 = [9,6,2]
+
+for i in 0...numbers.length
+    numbers[i] = numbers[i].sort
+    print "#{numbers[i]} "
+    numbers2 = numbers2.sort
+    if numbers[i] == numbers2
+        print true
+    elsif
+        print false
+    end
+    puts "\n"
+end
+=end
 # ------------------------------------------------ START -------------------------------------------------
 
 # ----------------------------------- CLASSES. --------------------------------
@@ -103,9 +138,25 @@ end
 
 def ticTacToeCompare(player_own_response, tic_tac_toe_wins)
         
+    tic_tac_toe_wins_ind = Array.new
+    value = 0
+
     for i in 0...tic_tac_toe_wins.length
 
-        if tic_tac_toe_wins[i] == player_own_response
+        tic_tac_toe_wins_ind = []
+        tic_tac_toe_wins_ind = tic_tac_toe_wins[i]
+        value = 0
+
+        for i in 0...player_own_response.length
+
+            if tic_tac_toe_wins_ind.include? player_own_response[i]
+                value += 1
+            else
+                value = value
+            end
+        end
+
+        if value == 3
             return true
         end
     end    
@@ -143,9 +194,9 @@ def ticTacToeDisplay(player_choice, symbol, tic_tac_toe_matrix)
 
         puts "\n"
         puts "#{tic_tac_toe_matrix [0][0]} | #{tic_tac_toe_matrix [0][1]} | #{tic_tac_toe_matrix [0][2]}          0 | 1 | 2"
-        puts "---------"
+        puts "---------         -----------"
         puts "#{tic_tac_toe_matrix [1][0]} | #{tic_tac_toe_matrix [1][1]} | #{tic_tac_toe_matrix [1][2]}          3 | 4 | 5"
-        puts "---------"
+        puts "---------         -----------"
         puts "#{tic_tac_toe_matrix [2][0]} | #{tic_tac_toe_matrix [2][1]} | #{tic_tac_toe_matrix [2][2]}          6 | 7 | 8"
         puts "\n"
 
@@ -164,6 +215,7 @@ ready_or_not = 0
 players_agree = 0
 turn_games = 0
 menu_option_1 = 0
+same_response = 0
 
 response = false
 
@@ -178,6 +230,7 @@ player_result_1 = Array.new
 player_result_2 = Array.new
 tic_tac_toe_matrix = Array.new
 players_in_role = Array.new
+general_answers = Array.new
 
 players_stock.push(player_info)
 
@@ -186,19 +239,13 @@ tic_tac_toe_wins = [        # All the possible winner's combinations.
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
-    [2, 1, 0],
-    [5, 4, 3],
-    [8, 7, 6],
+
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-    [6, 3, 0],
-    [7, 4, 1],
-    [8, 5, 2],
+
     [0, 4, 8],
-    [2, 4, 6],
-    [8, 4, 0],
-    [6, 4, 2]
+    [2, 4, 6]
 
 ]
 
@@ -214,11 +261,10 @@ tic_tac_toe_matrix = [
 puts "\n"
 puts "WELCOME TO THE TIC TAC TOC GAME"
 puts "\n"
+puts "Before to start, tell me, are you a new player or you've already registered in our database?"
 
 while menu_option_1 != 4
 
-    puts "\n"
-    puts "Before to start, tell me, are you a new player or you've already registered in our database?"
     puts "\n"
     puts "(1) I'm a new player."
     puts "(2) Play the game."
@@ -271,27 +317,27 @@ while menu_option_1 != 4
                     puts "\n"
                     puts "Remember you have to type the position's number of the tic tac toe. These are the positions: "
                     puts "\n"
-                    puts "0|1|2"
-                    puts "-----"
-                    puts "3|4|5"
-                    puts "-----"
-                    puts "6|7|8"
+                    puts " 0 | 1 | 2"
+                    puts "-----------"
+                    puts " 3 | 4 | 5"
+                    puts " ----------"
+                    puts " 6 | 7 | 8"
                     puts "\n"
                     puts "For example, if I am player 1 (X) and I type the position's number 3 on the keyboard, this will be the result: "
                     puts "\n"
-                    puts " | | "
-                    puts "-----"
-                    puts "X| | "
-                    puts "-----"
-                    puts " | | "
+                    puts "   |   |  "
+                    puts "-----------"
+                    puts " X |   |  "
+                    puts "-----------"
+                    puts "   |   | "
                     puts "\n"
                     puts "And, if I am player 2 (O) and I type the position's number 6 on the keyboard, this will be the result: "
                     puts "\n"
-                    puts " | | "
-                    puts "-----"
-                    puts "X| | "
-                    puts "-----"
-                    puts "O| | "
+                    puts "   |   |   "
+                    puts "-----------"
+                    puts " X |   |   "
+                    puts "-----------"
+                    puts " O |   |   "
                     puts "\n"
                     print "Did you understand? "
                     puts "\n"
@@ -304,18 +350,13 @@ while menu_option_1 != 4
                     if players_agree == 1
                         puts "\n"
                         puts "PERFECT! Let's do this!."
-
-
-
-
-
-
-
-
-
-
-
-
+                        puts "\n"
+                        puts "   |   |             0 | 1 | 2"
+                        puts "-----------"
+                        puts "   |   |             3 | 4 | 5"
+                        puts "-----------"
+                        puts "   |   |             6 | 7 | 8"
+                        puts "\n"
 
                         turn_games = 0
                         response = false
@@ -328,16 +369,41 @@ while menu_option_1 != 4
                                     break
                                 break
                                 end
-                                print "Please: #{player_in_turn.name}, you turn: "
-                                player_choice = (gets.chomp).to_i
+
+                                puts "\n"
+                                same_response = 0
+                                while same_response == 0
+
+                                    print "Please: #{player_in_turn.name}, you turn: "
+                                    player_choice = (gets.chomp).to_i
+                                    puts "\n"
+                                    
+                                    if player_choice >= 0 && player_choice <= 8
+
+                                        if general_answers.include? player_choice
+                                        puts "A player already selected that answer, please try again."
+                                        same_response = 0
+                                        else
+                                        general_answers.push(player_choice)
+                                        same_response = 1
+                                        end
+                                    
+                                    elsif player_choice < 0 || player_choice > 8
+                                        puts "You type a wrong value (only 0 to 8)"
+                                        puts "Please, try again."
+                                        same_response = 0
+                                    end
+                                end
+                                puts "\n"
+
                                 player_own_response.push(player_choice)
                                 puts "You response: #{player_own_response}"
                                 ticTacToeDisplay(player_choice, symbol, tic_tac_toe_matrix)
                                 response = ticTacToeCompare(player_own_response, tic_tac_toe_wins)
                                 if response == true
-                                    print "#{player_in_turn.name}, YOU WON !!!"
-                                    print "It was a really good match. Please, come back later!"
-                                    puts "\n"
+                                    puts "#{player_in_turn.name}, YOU WON !!!"
+                                    puts "It was a really good match." 
+                                    puts "Ready for a new game?"
                                     player_in_turn.victories += 1
                                     turn_games = 9
                                     break
@@ -348,30 +414,15 @@ while menu_option_1 != 4
                                 turn_games += 1
                                 puts "Turn: #{turn_games}"
                             end
-
-                          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         end
+                        
+                        same_response = 0
                         response = 0
                         player_choice = 0
                         player_result_1 = []
                         player_result_2 = []
                         players_in_role = []
+                        general_answers = []
                         tic_tac_toe_matrix = [
                             [" ", " ", " "],
                             [" ", " ", " "],
